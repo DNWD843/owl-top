@@ -15,7 +15,16 @@
       {
         "allowSingleExtends": true
       }
-    ]
+    ],
+    "indent": ["ERROR", 2, {
+      "SwitchCase": 1,
+      "MemberExpression": 1,
+      "ignoredNodes": ["JSXElement"]
+    }],
+    "react/jsx-indent": ["ERROR", 2, { "checkAttributes": true, "indentLogicalExpressions": true }],
+    "react/jsx-indent-props": ["ERROR", 2],
+    "react/jsx-one-expression-per-line": ["ERROR", { "allow": "single-child" }],
+    "max-len": ["WARN", { "code": 150, "ignoreStrings": true }]
   },
 
   "extends": [
