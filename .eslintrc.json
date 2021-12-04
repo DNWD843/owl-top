@@ -1,12 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 10,
-    "sourceType": "module",
-    "jsx": true,
-    "project": "./tsconfig.json"
-  },
+
   "plugins": [
     "@typescript-eslint"
   ],
