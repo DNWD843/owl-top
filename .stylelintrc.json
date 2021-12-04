@@ -7,7 +7,7 @@
 		"stylelint-order"
 	],
 	"rules": {
-		"indentation": "tab",
+		"indentation": [2],
 		"color-hex-case": "upper",
 		"selector-class-pattern": "^.*$",
 		"declaration-block-no-redundant-longhand-properties": [
