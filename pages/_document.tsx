@@ -10,14 +10,7 @@ class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="ru">
-        <Head>
-          {/* eslint-disable-next-line @next/next/no-title-in-document-head */}
-          <title>My first NextJS app</title>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-          <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
-            rel="stylesheet" />
-        </Head>
+        <Head />
         <body>
           <Main />
           <NextScript />

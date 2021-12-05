@@ -34,3 +34,23 @@
   color: var(--white);
   background: var(--grey-hover);
 }
+
+.arrowIcon {
+  display: inline-block;
+
+  margin-left: 10px;
+}
+
+.arrowDirectionIsDown {
+  transition: all 0.2s ease-in-out;
+  transform: rotate(90deg);
+}
+
+.primary svg,
+.ghost:hover svg {
+  fill: var(--white);
+}
+
+.primary:hover svg {
+  fill: var(--primary);
+}

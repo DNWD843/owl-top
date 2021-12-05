@@ -4,5 +4,7 @@ export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
   children: ReactNode,
   appearance: 'primary' | 'ghost',
   className?: string,
+  hasArrowIcon?: boolean,
+  arrowDirection?: 'down' | 'right'
 }
 

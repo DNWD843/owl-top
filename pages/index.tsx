@@ -8,11 +8,11 @@ const Home: NextPage = () => {
         Текст
       </Htag>
 
-      <Button appearance="primary">
+      <Button appearance="primary" hasArrowIcon={true} arrowDirection="down">
         Кнопка
       </Button>
 
-      <Button appearance="ghost">
+      <Button appearance="ghost" hasArrowIcon={true} arrowDirection="right">
         Кнопка
       </Button>
 
