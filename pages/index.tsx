@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import {Htag} from "../components";
+import {Button, Htag} from "../components";
 
 const Home: NextPage = () => {
   return (
@@ -7,6 +7,15 @@ const Home: NextPage = () => {
       <Htag tag="h1">
         Текст
       </Htag>
+
+      <Button appearance="primary">
+        Кнопка
+      </Button>
+
+      <Button appearance="ghost">
+        Кнопка
+      </Button>
+
     </>
   );
 };
