@@ -1,7 +1,9 @@
 import type { NextPage } from 'next';
-import {Button, Heading, Paragraph, Tag} from "../components";
+import {Button, Heading, Paragraph, Rating, Tag} from "../components";
+import {useState} from "react";
 
 const Home: NextPage = () => {
+  const [counter, setCounter] = useState(0);
   return (
     <>
       <Heading type="h1">
@@ -57,6 +59,8 @@ const Home: NextPage = () => {
       <Tag size="medium" color="green">medium Tag green</Tag>
       <Tag size="medium" color="primary">medium Tag primary</Tag>
       <Tag size="medium" href="#" color="grey">medium Tag grey</Tag>
+
+      <Rating rating={7} />
 
     </>
   );
