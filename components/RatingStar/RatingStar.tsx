@@ -10,6 +10,7 @@ export const RatingStar = (
     changeRatingValue,
     setPreviousRatingValue,
     setNewRatingValue,
+    handlePressSpaceKeyboardButton,
   }: RatingStarProps) => {
 
   const starIconClassName = classnames(styles.icon, {
@@ -23,6 +24,8 @@ export const RatingStar = (
       onMouseEnter={changeRatingValue}
       onMouseLeave={setPreviousRatingValue}
       onClick={setNewRatingValue}
+      tabIndex={isEditable ? 0 : -1}
+      onKeyDown={isEditable ? handlePressSpaceKeyboardButton : undefined}
     />
   );
 };

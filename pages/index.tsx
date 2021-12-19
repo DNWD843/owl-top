@@ -1,10 +1,9 @@
 import type { NextPage } from 'next';
 import {Button, Heading, Paragraph, Rating, Tag} from "../components";
 import {useState} from "react";
-import {DEFAULT_RATING_ARRAY_LENGTH} from '../constants';
 
 const Home: NextPage = () => {
-  const [rating, setRating] = useState(DEFAULT_RATING_ARRAY_LENGTH);
+  const [rating, setRating] = useState(0);
   return (
     <>
       <Heading type="h1">
@@ -62,6 +61,7 @@ const Home: NextPage = () => {
       <Tag size="medium" href="#" color="grey">medium Tag grey</Tag>
 
       <Rating
+        isEditable
         rating={rating}
         setRating={setRating}
       />
