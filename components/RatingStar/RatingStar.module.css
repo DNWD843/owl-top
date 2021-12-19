@@ -1,0 +1,12 @@
+.icon {
+  box-sizing: content-box;
+  padding-right: 5px;
+}
+
+.editable {
+  cursor: pointer;
+}
+
+.filled {
+  fill: var(--primary);
+}

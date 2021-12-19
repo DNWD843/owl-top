@@ -1,11 +1,3 @@
 .container {
   display: flex;
 }
-
-.filled {
-  fill: var(--primary);
-}
-
-.star {
-  margin-right: 5px;
-}

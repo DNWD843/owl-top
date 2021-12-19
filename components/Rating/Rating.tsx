@@ -1,28 +1,42 @@
 import {RatingProps} from './Rating.props';
 import styles from './Rating.module.css';
 import classnames from 'classnames';
-import {Star} from './Star';
-import {useEffect, useState} from 'react';
+import {RatingStar} from '../RatingStar/RatingStar';
+import {useCallback, useState} from 'react';
+import {DEFAULT_RATING_ARRAY_LENGTH} from '../../constants';
 
-const DEFAULT_RATING = 5;
+const ratingArray: JSX.Element[] = new Array(DEFAULT_RATING_ARRAY_LENGTH).fill(<></>);
 
-export const Rating = ({ isEditable, rating, setRating, className, ...props }:RatingProps) => {
-  const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(DEFAULT_RATING).fill(<></>));
+export const Rating = ({ isEditable = true, rating, setRating, className, ...props }: RatingProps) => {
+  const [currentRatingValue, setCurrentRatingValue] = useState<number>(rating);
   const containerClassName = classnames(className, styles.container);
 
-  useEffect(() => {
-    setRatingArray(new Array(rating).fill(<></>));
-  }, [rating]);
+  const changeRatingValue = useCallback((index) => () => {
+    if (!isEditable) return;
+    setCurrentRatingValue(index + 1);
+  }, [isEditable]);
+
+  const setPreviousRatingValue = useCallback(() => {
+    if (!isEditable) return;
+    setCurrentRatingValue(rating);
+  }, [rating, isEditable]);
+
+  const setNewRatingValue = useCallback((index) => () => {
+    if (!isEditable || !setRating) return;
+    setRating(index + 1);
+  }, [setRating, isEditable]);
 
   return (
     <div className={containerClassName} {...props}>
       {
-        ratingArray.map((star, index) => (
-          <Star
+        ratingArray.map((item, index) => (
+          <RatingStar
             key={index}
-            className={classnames(styles.star, {
-              [styles.filled]: index < rating
-            })}
+            isEditable={isEditable}
+            isFilled={index < currentRatingValue}
+            changeRatingValue={changeRatingValue(index)}
+            setPreviousRatingValue={setPreviousRatingValue}
+            setNewRatingValue={setNewRatingValue(index)}
           />
         ))
       }

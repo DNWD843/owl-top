@@ -1,0 +1,1 @@
+export const DEFAULT_RATING_ARRAY_LENGTH = 5;
