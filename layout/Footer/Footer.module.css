@@ -3,7 +3,27 @@
 
   padding: 25px 30px;
 
+  color: var(--white);
+
   background-color: var(--primary);
+
+  font-size: 16px;
+  line-height: 20px;
   grid-template-columns: 1fr auto auto;
-  gap: 40px;
+  gap: 10px 40px;
+}
+
+.footer a {
+  transition: all ease-in-out 0.25s;
+}
+
+.footer a:hover {
+  color: var(--grey-light);
+  text-shadow: 0 0 2px #F6F6F6;
+}
+
+@media screen and (max-width: 765px) {
+  .footer {
+    grid-template-columns: 1fr;
+  }
 }
