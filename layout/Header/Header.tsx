@@ -3,7 +3,7 @@ import {HeaderProps} from './Header.props';
 import styles from './Header.module.css';
 
 export const Header = ({ ...restProps }: HeaderProps): JSX.Element => (
-  <div {...restProps}>
+  <header {...restProps}>
     Header
-  </div>
+  </header>
 );
