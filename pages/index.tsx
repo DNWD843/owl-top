@@ -1,10 +1,13 @@
-import type { NextPage } from 'next';
+import type {GetStaticProps, NextPage} from 'next';
 import {Button, Heading, Paragraph, Rating, Tag} from '../components';
 import {withLayout} from '../HOC/withLayout';
 import {useState} from 'react';
+import axios from 'axios';
+import {MenuItem} from "../interfaces/menu.interface";
 
-const HomePage: NextPage = () => {
+const HomePage = ({menu}: HomeProps) => {
   const [rating, setRating] = useState(0);
+  const [data, setData] = useState<MenuItem[]>([]);
   return (
     <>
       <Heading type="h1">
@@ -23,7 +26,18 @@ const HomePage: NextPage = () => {
         дефолтный Заголовок
       </Heading>
 
-      <Button appearance="primary" hasArrowIcon={true} arrowDirection="down">
+      <Button
+        appearance="primary"
+        hasArrowIcon={true}
+        arrowDirection="down"
+        onClick={async () => {
+          const firstCategory = 0;
+          const {data: menu} = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+            firstCategory
+          });
+          setData(menu);
+        }}
+      >
         Кнопка
       </Button>
 
@@ -67,8 +81,43 @@ const HomePage: NextPage = () => {
         setRating={setRating}
       />
 
+      <ul>
+        {
+          menu.map((item) => (
+            <li key={item._id.secondCategory}>{item._id.secondCategory}</li>
+          ))
+        }
+      </ul>
+
+      <ol>
+        {
+          data.map((item) => (
+            <li key={item._id.secondCategory}>{item.pages.map(page => page.title).join('/')}</li>
+          ))
+        }
+      </ol>
+
     </>
   );
 };
 
 export default withLayout(HomePage);
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const firstCategory = 0;
+  const {data: menu} = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {
+    firstCategory
+  });
+  return {
+    props: {
+      menu,
+      firstCategory,
+    }
+  };
+};
+
+// этот интерфейс объявили тут, потому что в pages должны лежать только файлы страниц!
+interface HomeProps extends Record<string, unknown> {
+  menu: MenuItem[];
+  firstCategory: number;
+}
