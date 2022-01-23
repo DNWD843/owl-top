@@ -6,7 +6,7 @@ import axios from 'axios';
 import {MenuItem} from "../interfaces/menu.interface";
 
 const HomePage = ({menu}: HomeProps) => {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(3);
   const [data, setData] = useState<MenuItem[]>([]);
   return (
     <>

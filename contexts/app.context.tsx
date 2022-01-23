@@ -13,7 +13,7 @@ export const MyAppContext = createContext<IAppContext>({
   firstCategory: TopLevelCategory.Courses,
 });
 
-export const AppContextProvider = ({menu, firstCategory, children}: PropsWithChildren<IAppContext>) => {
+export const AppContextProvider = ({menu = [], firstCategory, children}: PropsWithChildren<IAppContext>) => {
   const [menuState, setMenuState] = useState<MenuItem[]>(menu);
 
   const setMenu = (newMenu:MenuItem[]) => {
