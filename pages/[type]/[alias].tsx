@@ -1,24 +1,23 @@
 import type {GetStaticPaths, GetStaticProps, GetStaticPropsContext} from 'next';
 import {withLayout} from '../../HOC/withLayout';
-import {useState} from 'react';
 import axios from 'axios';
 import {MenuItem} from "../../interfaces/menu.interface";
 import {TopLevelCategory, TopPageModel} from "../../interfaces/page.interface";
 import {ProductModel} from "../../interfaces/product.interface";
 import {firstLevelMenu} from "../../helpers/helpers";
+import {TopPageComponent} from "../../page-components";
 
-const Course = ({menu, page, products}: CourseProps) => {
-  const [rating, setRating] = useState(0);
+const TopPage = ({firstCategory, page, products}: TopPageProps) => {
   return (
-    <>
-      {
-        products?.length || 'no products founded'
-      }
-    </>
+    <TopPageComponent
+      firstCategory={firstCategory}
+      page={page}
+      products={products}
+    />
   );
 };
 
-export default withLayout(Course);
+export default withLayout(TopPage);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   let paths: string[] = [];
@@ -35,7 +34,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<CourseProps> = async ({params}) => {
+export const getStaticProps: GetStaticProps<TopPageProps> = async ({params}) => {
   if (!params) {
     return {
       notFound: true
@@ -82,7 +81,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({params}) => {
 };
 
 // этот интерфейс объявили тут, потому что в pages должны лежать только файлы страниц!
-interface CourseProps extends Record<string, unknown> {
+interface TopPageProps extends Record<string, unknown> {
   menu: MenuItem[];
   firstCategory: TopLevelCategory;
   page: TopPageModel;
