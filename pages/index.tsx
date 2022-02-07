@@ -1,5 +1,5 @@
 import type {GetStaticProps, NextPage} from 'next';
-import {Button, Heading, Paragraph, Rating, Tag} from '../components';
+import {Button, Heading, Input, Paragraph, Rating, Tag, Textarea} from '../components';
 import {withLayout} from '../HOC/withLayout';
 import {useState} from 'react';
 import axios from 'axios';
@@ -88,6 +88,10 @@ const HomePage = ({menu}: HomeProps) => {
           ))
         }
       </ol>
+
+      <Input placeholder="placeholder" />
+
+      <Textarea placeholder="textarea placeholder"/>
 
     </>
   );
