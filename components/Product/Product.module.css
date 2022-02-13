@@ -125,3 +125,24 @@
 
   border-left: 3px solid var(--red);
 }
+
+.characteristic {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+
+  padding-right: 60px;
+  gap: 10px;
+
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.characteristicName {
+  font-weight: 600;
+}
+
+.characteristicDots {
+  margin-bottom: 8px;
+
+  border-bottom: 1px dashed var(--grey-light);
+}
