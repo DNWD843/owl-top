@@ -7,6 +7,7 @@ import {Button} from "../Button/Button";
 import {declOfNum, priceRu} from "../../helpers/helpers";
 import {Divider} from "../Divider/Divider";
 import Image from 'next/image';
+import classNames from "classnames";
 
 export const Product = ({product}: ProductProps) => {
 
@@ -84,7 +85,7 @@ export const Product = ({product}: ProductProps) => {
         )}
       </div>
 
-      <Divider className={styles.hr} />
+      <Divider className={classNames(styles.hr, styles.hr2)} />
 
       <div className={styles.actions}>
         <Button className={styles.button} appearance="primary">Узнать подробнее</Button>
