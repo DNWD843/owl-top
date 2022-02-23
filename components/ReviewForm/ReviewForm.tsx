@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {ReviewFormProps} from "./ReviewForm.props";
 import styles from './ReviewForm.module.css';
 import classnames from "classnames";
@@ -7,19 +7,36 @@ import {Textarea} from "../Textarea/Textarea";
 import {Button} from "../Button/Button";
 import {Input} from "../Input/Input";
 import CloseIcon from './close.svg';
+import {useForm, Controller} from "react-hook-form";
+import { IReviewForm } from "./ReviewForm.interface";
 
 export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) => {
+  const { control, register, handleSubmit } = useForm<IReviewForm>();
+  const submitForm = (data: IReviewForm) => {
+    console.log(data);
+  };
 
   return (
-    <>
+    <form  onSubmit={handleSubmit(submitForm)}>
       <div className={classnames(styles.reviewForm, className)} {...props}>
-        <Input placeholder="Имя"/>
-        <Input placeholder="Заголовок отзыва" className={styles.title}/>
+        <Input {...register('name')} placeholder="Имя"/>
+        <Input {...register('title')} placeholder="Заголовок отзыва" className={styles.title}/>
         <div className={styles.rating}>
           <span>Оценка</span>
-          <Rating rating={0} />
+          <Controller
+            control={control}
+            name="rating"
+            render={({field}) => (
+              <Rating
+                isEditable
+                rating={field.value}
+                setRating={field.onChange}
+                {...field}
+              />
+            )}
+          />
         </div>
-        <Textarea placeholder="Текст отзыва" className={styles.description}/>
+        <Textarea {...register('description')} placeholder="Текст отзыва" className={styles.description}/>
         <div className={styles.submit}>
           <Button className={styles.button} appearance="primary">Оправить</Button>
           <span>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
@@ -31,6 +48,6 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
         <div>Ваш отзыв отправлен и будет опубликован после модерации.</div>
         <CloseIcon className={styles.close} />
       </div>
-    </>
+    </form>
   );
 };
