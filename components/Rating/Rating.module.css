@@ -1,3 +1,19 @@
 .container {
+  position: relative;
+
   display: flex;
+}
+
+.withError svg {
+  stroke: var(--red);
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+
+  color: var(--red);
+
+  font-size: 12px;
 }

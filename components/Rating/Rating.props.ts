@@ -4,4 +4,5 @@ export interface RatingProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivEle
   isEditable?: boolean,
   rating: number,
   setRating?: (raiting: number) => void,
+  error?: string,
 }

@@ -17,3 +17,21 @@
 .input::placeholder {
   color: var(--grey);
 }
+
+.formField {
+  position: relative;
+}
+
+.withError {
+  border: 1px solid var(--red);
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+
+  color: var(--red);
+
+  font-size: 12px;
+}

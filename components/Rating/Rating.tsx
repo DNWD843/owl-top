@@ -2,13 +2,21 @@ import {RatingProps} from './Rating.props';
 import styles from './Rating.module.css';
 import classnames from 'classnames';
 import {RatingStar} from '../RatingStar/RatingStar';
-import {useCallback, useState, KeyboardEvent, useEffect, forwardRef, ReactFragment} from 'react';
+import {useCallback, useState, KeyboardEvent, useEffect, forwardRef} from 'react';
 import {DEFAULT_RATING_ARRAY_LENGTH} from '../../constants';
+import classNames from "classnames";
 
 const ratingArray: JSX.Element[] = new Array(DEFAULT_RATING_ARRAY_LENGTH).fill(<></>);
 
 // eslint-disable-next-line react/display-name
-export const Rating = forwardRef<HTMLDivElement, RatingProps>(({ isEditable = false, rating = 0, setRating, className, ...props }, ref) => {
+export const Rating = forwardRef<HTMLDivElement, RatingProps>((
+  { isEditable = false,
+    rating = 0,
+    setRating,
+    error,
+    className,
+    ...props },
+  ref) => {
   const [currentRatingValue, setCurrentRatingValue] = useState<number>(0);
   const containerClassName = classnames(className, styles.container);
 
@@ -37,7 +45,9 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(({ isEditable = fa
   }, [rating]);
 
   return (
-    <div ref={ref} className={containerClassName} {...props}>
+    <div ref={ref} className={classNames(styles.container, {
+      [styles.withError]: error,
+    })} {...props}>
       {
         ratingArray.map((item, index) => (
           <RatingStar
@@ -51,7 +61,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(({ isEditable = fa
           />
         ))
       }
-
+      {error && (<span className={styles.errorMessage}>{error}</span>)}
     </div>
   );
 });

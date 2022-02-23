@@ -1,4 +1,6 @@
 .textarea {
+  width: 100%;
+
   padding: 7px 12px;
 
   resize: none;
@@ -18,4 +20,24 @@
 
 .textarea::placeholder {
   color: var(--grey);
+}
+
+.formField {
+  position: relative;
+
+  width: 100%;
+}
+
+.withError {
+  border: 1px solid var(--red);
+}
+
+.errorMessage {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+
+  color: var(--red);
+
+  font-size: 12px;
 }

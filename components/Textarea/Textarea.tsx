@@ -4,8 +4,17 @@ import classNames from 'classnames';
 import React, {forwardRef} from 'react';
 
 // eslint-disable-next-line react/display-name
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({className, ...props}, ref) => {
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({className, error, ...props}, ref) => {
   return (
-    <textarea ref={ref} className={classNames(className, styles.textarea)} {...props} />
+    <div className={classNames(className, styles.formField)}>
+      <textarea
+        ref={ref}
+        className={classNames(styles.textarea, {
+          [styles.withError]: error,
+        })}
+        {...props}
+      />
+      {error && (<span className={styles.errorMessage}>{error}</span>)}
+    </div>
   );
 });
