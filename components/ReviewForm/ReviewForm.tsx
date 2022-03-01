@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react';
+import React, {forwardRef, useState} from 'react';
 import {ReviewFormProps} from "./ReviewForm.props";
 import styles from './ReviewForm.module.css';
 import classnames from "classnames";
@@ -8,13 +8,29 @@ import {Button} from "../Button/Button";
 import {Input} from "../Input/Input";
 import CloseIcon from './close.svg';
 import {useForm, Controller, FieldError} from "react-hook-form";
-import { IReviewForm } from "./ReviewForm.interface";
+import {IReviewForm, IReviewSentResponse} from "./ReviewForm.interface";
 import classNames from "classnames";
+import axios from "axios";
+import {API} from "../../helpers/api";
 
 export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) => {
-  const { control, register, handleSubmit, formState: { errors } } = useForm<IReviewForm>();
-  const submitForm = (data: IReviewForm) => {
-    console.log(data);
+  const { control, register, handleSubmit, formState: { errors }, reset } = useForm<IReviewForm>();
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<string>();
+
+  const submitForm = async (formData: IReviewForm) => {
+    try {
+      const { data } = await  axios.post<IReviewSentResponse>(API.review.createDemo, {...formData, productId});
+      if (data.message) {
+        setIsSuccess(true);
+        reset();
+      } else {
+        setError("Something went wrong, dude.");
+      }
+    } catch (err: any) {
+      setError(err.message);
+    }
+
   };
 
   return (
@@ -65,11 +81,20 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
         </div>
       </div>
 
-      <div className={styles.success}>
-        <div className={styles.successTitle}>Благодарим Вас за отзыв!</div>
-        <div>Ваш отзыв отправлен и будет опубликован после модерации.</div>
-        <CloseIcon className={styles.close} />
-      </div>
+      {isSuccess && (
+        <div className={classNames(styles.success, styles.panel)}>
+          <div className={styles.successTitle}>Благодарим Вас за отзыв!</div>
+          <div>Ваш отзыв отправлен и будет опубликован после модерации.</div>
+          <CloseIcon className={styles.close} onClick={() => setIsSuccess(false)}/>
+        </div>
+      )}
+      {Boolean(error) && (
+        <div className={classnames(styles.error, styles.panel)}>
+          Ошибка запроса! Попробуйте, пожалуйста снова!
+          <CloseIcon className={styles.close} onClick={() => setError('')}/>
+        </div>
+      )}
+
     </form>
   );
 };
