@@ -4,6 +4,7 @@ import {Header} from './Header/Header';
 import {Footer} from './Footer/Footer';
 import styles from './Layout.module.css';
 import React from 'react';
+import {Up} from "../components";
 
 export const Layout = ({children}: LayoutProps): JSX.Element => (
   <div className={styles.wrapper}>
@@ -13,5 +14,6 @@ export const Layout = ({children}: LayoutProps): JSX.Element => (
       {children}
     </div>
     <Footer className={styles.footer}/>
+    <Up />
   </div>
 );
