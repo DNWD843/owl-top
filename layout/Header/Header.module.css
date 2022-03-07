@@ -1,0 +1,32 @@
+.header {
+  display: none;
+}
+
+.mobileMenu {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  overflow-y: scroll;
+
+  padding: 15px;
+
+  background: #F5F6F8;
+}
+
+.menuClose {
+  position: fixed;
+  z-index: 110;
+  top: 15px;
+  right: 15px;
+}
+
+@media screen and (max-width: 765px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -4,9 +4,3 @@
 
   align-content: start;
 }
-
-@media screen and (max-width: 765px) {
-  .sidebar {
-    display: none;
-  }
-}
