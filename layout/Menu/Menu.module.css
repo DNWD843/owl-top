@@ -7,7 +7,6 @@
 
   font-size: 18px;
   font-weight: 500;
-  line-height: 25px;
   grid-template-columns: 24px 1fr;
   gap: 20px;
 }
@@ -29,10 +28,10 @@
   text-transform: uppercase;
 
   color: var(--grey-dark);
+  outline-offset: -1px;
 
   font-size: 12px;
   font-weight: 300;
-  line-height: 16px;
 }
 
 .secondBlock {
@@ -55,10 +54,10 @@
   cursor: pointer;
 
   color: var(--grey-dark);
+  outline-offset: -1px;
 
   font-size: 14px;
   font-weight: 500;
-  line-height: 19px;
 }
 
 .thirdLevelActive,
