@@ -1,8 +1,7 @@
 import {RatingProps} from './Rating.props';
 import styles from './Rating.module.css';
-import classnames from 'classnames';
 import {RatingStar} from '../RatingStar/RatingStar';
-import {useCallback, useState, KeyboardEvent, useEffect, forwardRef} from 'react';
+import {useCallback, useState, KeyboardEvent, useEffect, forwardRef, useRef} from 'react';
 import {DEFAULT_RATING_ARRAY_LENGTH} from '../../constants';
 import classNames from "classnames";
 
@@ -11,14 +10,13 @@ const ratingArray: JSX.Element[] = new Array(DEFAULT_RATING_ARRAY_LENGTH).fill(<
 // eslint-disable-next-line react/display-name
 export const Rating = forwardRef<HTMLDivElement, RatingProps>((
   { isEditable = false,
-    rating = 0,
+    rating = 1,
     setRating,
     error,
     className,
     ...props },
   ref) => {
   const [currentRatingValue, setCurrentRatingValue] = useState<number>(0);
-  const containerClassName = classnames(className, styles.container);
 
   const changeRatingValue = useCallback((index: number) => () => {
     if (!isEditable) return;
@@ -35,14 +33,34 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>((
     setRating(index + 1);
   }, [setRating, isEditable]);
 
-  const handlePressSpaceOnRatingStar = useCallback((index: number) => (evt: KeyboardEvent<SVGElement>) => {
-    if ((evt.code !== "Space") || !setRating) return;
-    setRating(index + 1);
-  }, [setRating]);
+  const handlePressArrowButtonOnRatingStar = useCallback((evt: KeyboardEvent<HTMLDivElement>) => {
+    if (!isEditable || !setRating) return;
+
+    if (evt.code === 'ArrowRight' || evt.code === 'ArrowUp') {
+      evt.preventDefault();
+      setRating(rating < 5 ? rating + 1 : 5);
+    }
+
+    if (evt.code === 'ArrowLeft' || evt.code === 'ArrowDown') {
+      evt.preventDefault();
+      setRating(rating > 1 ? rating - 1 : 1);
+    }
+  }, [isEditable, rating, setRating]);
+
+  const computeFocus = (rating: number, index: number): number => {
+    if (!isEditable)  return -1;
+
+    if (!rating && index === 0) return 0;
+
+    if (rating === index + 1) return 0;
+
+    return -1;
+  };
 
   useEffect(() => {
     setCurrentRatingValue(rating);
   }, [rating]);
+
 
   return (
     <div ref={ref} className={classNames(styles.container, {
@@ -57,7 +75,8 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>((
             changeRatingValue={changeRatingValue(index)}
             setPreviousRatingValue={setPreviousRatingValue}
             setNewRatingValue={setNewRatingValue(index)}
-            handlePressSpaceKeyboardButton={handlePressSpaceOnRatingStar(index)}
+            handlePressKeyboardArrowButton={handlePressArrowButtonOnRatingStar}
+            tabIndex={computeFocus(rating, index)}
           />
         ))
       }

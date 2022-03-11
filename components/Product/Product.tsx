@@ -35,6 +35,7 @@ export const Product = motion(forwardRef<HTMLDivElement, ProductProps>(({product
       behavior: "smooth",
       block: "start",
     });
+    reviewRef.current?.focus();
   };
 
   return (
@@ -140,6 +141,7 @@ export const Product = motion(forwardRef<HTMLDivElement, ProductProps>(({product
           color="blue"
           className={classNames(styles.reviews)}
           ref={reviewRef}
+          tabIndex={0}
         >
           {product.reviews.map((review) => (
             <div key={review._id}>

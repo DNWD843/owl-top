@@ -6,5 +6,6 @@ export interface RatingStarProps extends DetailedHTMLProps<React.SVGAttributes<S
   changeRatingValue: () => void,
   setPreviousRatingValue: () => void,
   setNewRatingValue: () => void,
-  handlePressSpaceKeyboardButton: (evt: KeyboardEvent<SVGElement>) => void,
+  handlePressKeyboardArrowButton: (evt: KeyboardEvent<HTMLDivElement>) => void,
+  tabIndex: number,
 }
