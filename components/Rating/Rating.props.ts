@@ -5,4 +5,5 @@ export interface RatingProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivEle
   rating: number,
   setRating?: (raiting: number) => void,
   error?: string,
+  tabIndex: number,
 }

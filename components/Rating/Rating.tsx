@@ -14,6 +14,7 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>((
     setRating,
     error,
     className,
+    tabIndex,
     ...props },
   ref) => {
   const [currentRatingValue, setCurrentRatingValue] = useState<number>(0);
@@ -50,9 +51,9 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>((
   const computeFocus = (rating: number, index: number): number => {
     if (!isEditable)  return -1;
 
-    if (!rating && index === 0) return 0;
+    if (!rating && index === 0) return tabIndex ?? 0;
 
-    if (rating === index + 1) return 0;
+    if (rating === index + 1) return tabIndex ?? 0;
 
     return -1;
   };

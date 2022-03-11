@@ -13,7 +13,7 @@ import classNames from "classnames";
 import axios from "axios";
 import {API} from "../../helpers/api";
 
-export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) => {
+export const ReviewForm = ({ productId, className, isOpened, ...props }: ReviewFormProps) => {
   const { control, register, handleSubmit, formState: { errors }, reset } = useForm<IReviewForm>();
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>();
@@ -40,12 +40,14 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
           {...register('name', {required: { value: true, message: 'Введите имя'}})}
           placeholder="Имя"
           error={errors?.name?.message}
+          tabIndex={isOpened ? 0 : -1}
         />
         <Input
           {...register('title', {required: {value: true, message: 'Введите заголовок'}})}
           placeholder="Заголовок отзыва"
           className={styles.title}
           error={errors?.title?.message}
+          tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.rating}>
           <span>Оценка</span>
@@ -58,6 +60,7 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
                 rating={field.value}
                 setRating={field.onChange}
                 error={fieldState?.error?.message}
+                tabIndex={isOpened ? 0 : -1}
                 {...field}
               />
             )}
@@ -74,9 +77,10 @@ export const ReviewForm = ({ productId, className, ...props }: ReviewFormProps) 
           placeholder="Текст отзыва"
           className={styles.description}
           error={errors?.description?.message}
+          tabIndex={isOpened ? 0 : -1}
         />
         <div className={styles.submit}>
-          <Button className={styles.button} appearance="primary">Оправить</Button>
+          <Button className={styles.button} appearance="primary" tabIndex={isOpened ? 0 : -1}>Оправить</Button>
           <span>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
         </div>
       </div>
