@@ -30,7 +30,7 @@ export const Search = ({className, ...props}: SearchProps) => {
   return (
     <div className={classNames(className, styles.search)} {...props}>
       <Input
-        aria-label="поле ввода для поиска"
+        aria-label="поле ввода для поиска по сайту"
         type="search"
         className={styles.input}
         placeholder="Поиск..."
@@ -39,7 +39,7 @@ export const Search = ({className, ...props}: SearchProps) => {
         onKeyDown={handleKeyDown}
       />
       <Button
-        aria-label="кнопка поиска"
+        aria-label="поиска по сайту"
         appearance="primary"
         className={styles.button}
         onClick={goToNewUrl}
