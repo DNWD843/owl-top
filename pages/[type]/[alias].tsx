@@ -8,8 +8,13 @@ import {firstLevelMenu} from "../../helpers/helpers";
 import {TopPageComponent} from "../../page-components";
 import {API} from "../../helpers/api";
 import Head from 'next/head';
+import {NotFoundPage} from "../404";
 
 const TopPage = ({firstCategory, page, products}: TopPageProps) => {
+  if (!page || !products) return (
+    <NotFoundPage />
+  );
+
   return (
     <>
       <Head>
@@ -41,7 +46,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
