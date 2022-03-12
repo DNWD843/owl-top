@@ -1,0 +1,17 @@
+# Файл docker-compose должен начинаться с тега версии.
+version: "3"
+
+# Следует учитывать, что docker-compose работает с сервисами.
+# 1 сервис = 1 контейнер.
+# Сервисом может быть клиент, сервер, сервер баз данных...
+# Раздел, в котором будут описаны сервисы, начинается с 'services'.
+services:
+  app:
+    image: my-first-app
+    container_name: my-first-app
+    restart: always
+    ports:
+      - "3000:3000"
+# запуск контейнера
+# docker-compose up -d, где -d означает отвязку от контейнера
+# docker-compose down - остановка
