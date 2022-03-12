@@ -1,0 +1,11 @@
+.notFound {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  margin-top: 30%;
+  margin-bottom: 20px;
+}
